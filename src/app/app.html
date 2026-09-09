@@ -1,0 +1,15 @@
+<div class="app-layout">
+  <app-header (openBackupModal)="isBackupModalOpen.set(true)" />
+
+  <main class="main-content">
+    <div class="content-container">
+      <router-outlet />
+    </div>
+  </main>
+
+  <app-nav-tabs />
+
+  @if (isBackupModalOpen()) {
+    <app-backup-modal (close)="isBackupModalOpen.set(false)" />
+  }
+</div>

@@ -1,0 +1,397 @@
+import { WorkoutDay } from '../models/exercise.model';
+import { SupplementConfig } from '../models/daily-check.model';
+import { NutritionSettings } from '../models/nutrition.model';
+import { UserProfile } from '../models/user-profile.model';
+import { WeightEntry } from '../models/weight.model';
+import { MeasurementEntry } from '../models/measurement.model';
+
+export const DEFAULT_USER_PROFILE: UserProfile = {
+  name: 'Atleta',
+  age: 31,
+  heightCm: 170,
+  startingWeightKg: 76.2,
+  startDate: '2026-09-09',
+  targetEndDate: '2026-12-31',
+  targetLossWeeklyPctMin: 0.5,
+  targetLossWeeklyPctMax: 1.0,
+  daysPerWeekTraining: 6,
+  currentStreak: 0,
+  bestStreak: 0,
+};
+
+export const DEFAULT_SUPPLEMENTS: SupplementConfig[] = [
+  {
+    id: 'creatine',
+    name: 'Creatina Monohidrato',
+    dose: '3-5 g / día',
+    timing: 'Todos los días a la misma hora (ej. post-entreno o desayuno)',
+    purpose: 'Saturación de fosfocreatina intramuscular, fuerza y retención de masa magra.',
+  },
+  {
+    id: 'zinc',
+    name: 'Zinc',
+    dose: '11 mg / día',
+    timing: 'Con una comida principal (nunca con el estómago vacío para evitar náuseas)',
+    purpose: 'Soporte hormonal, función inmune y síntesis proteica.',
+  },
+  {
+    id: 'vit_c',
+    name: 'Vitamina C',
+    dose: '90-500 mg / día',
+    timing: 'Repartida en 2 tomas si supera los 200 mg (mañana y tarde/comida)',
+    purpose: 'Antioxidante, síntesis de colágeno y absorción de micronutrientes.',
+  },
+];
+
+export const DEFAULT_NUTRITION_SETTINGS: NutritionSettings = {
+  targetCalories: 2150,
+  targetProteinG: 168, // ~2.2g/kg peso magro
+  targetFatG: 60,      // ~0.8g/kg
+  targetCarbG: 235,    // Combustible glucolítico para entrenamientos intensos
+  isEditable: true,
+  notes: 'Déficit moderado para recomposición corporal (pérdida de grasa con máxima retención muscular)',
+};
+
+export const DEFAULT_WORKOUT_ROUTINE: WorkoutDay[] = [
+  {
+    dayNumber: 1,
+    dayName: 'Lunes',
+    type: 'Push',
+    title: 'Push 1: Fuerza Pecho & Hombro Pesado',
+    targetDurationMinutes: 65,
+    exercises: [
+      {
+        id: 'push1-press-banca',
+        name: 'Press de banca con barra',
+        targetSets: 4,
+        targetReps: '6-8',
+        muscleGroup: 'Pecho',
+        notes: 'Pausa controlada de 1s en pecho, retracción escapular activa.',
+      },
+      {
+        id: 'push1-press-militar',
+        name: 'Press militar de pie con barra',
+        targetSets: 3,
+        targetReps: '8-10',
+        muscleGroup: 'Hombro',
+        notes: 'Core firme, glúteos apretados, bloqueo controlado arriba.',
+      },
+      {
+        id: 'push1-press-inclinado-manc',
+        name: 'Press inclinado con mancuernas (30°)',
+        targetSets: 3,
+        targetReps: '8-10',
+        muscleGroup: 'Pecho superior',
+        notes: 'Rango de recorrido completo sintiendo el estiramiento.',
+      },
+      {
+        id: 'push1-fondos-triceps',
+        name: 'Fondos en paralelas o extensión tríceps copa',
+        targetSets: 3,
+        targetReps: '10-12',
+        muscleGroup: 'Tríceps',
+        notes: 'Codos cerrados para mayor énfasis en tríceps.',
+      },
+      {
+        id: 'push1-elevaciones-laterales',
+        name: 'Elevaciones laterales con mancuernas',
+        targetSets: 3,
+        targetReps: '12-15',
+        muscleGroup: 'Deltoides lateral',
+        notes: 'Ligera inclinación hacia adelante, subir guiando con los codos.',
+      },
+    ],
+  },
+  {
+    dayNumber: 2,
+    dayName: 'Martes',
+    type: 'Pull',
+    title: 'Pull 1: Espalda Densidad & Tracción Pesada',
+    targetDurationMinutes: 70,
+    exercises: [
+      {
+        id: 'pull1-peso-muerto',
+        name: 'Peso muerto convencional',
+        targetSets: 4,
+        targetReps: '6-8',
+        muscleGroup: 'Cadena posterior / Espalda',
+        notes: 'Tensión en dorsales antes del despegue, empuje con las piernas.',
+      },
+      {
+        id: 'pull1-dominadas-jalon',
+        name: 'Dominadas con lastre o Jalón al pecho prono',
+        targetSets: 3,
+        targetReps: '8-10',
+        muscleGroup: 'Dorsal ancho',
+        notes: 'Pecho hacia la barra, tracción guiada por los codos.',
+      },
+      {
+        id: 'pull1-remo-barra',
+        name: 'Remo con barra 45° (agarre supino/prono)',
+        targetSets: 3,
+        targetReps: '8-10',
+        muscleGroup: 'Espalda media',
+        notes: 'Tronco estable, llevar la barra hacia la zona del ombligo.',
+      },
+      {
+        id: 'pull1-face-pull',
+        name: 'Face pull en polea con cuerda',
+        targetSets: 3,
+        targetReps: '12-15',
+        muscleGroup: 'Deltoides posterior / Rotadores',
+        notes: 'Rotación externa al final, pausa de 1s para salud del hombro.',
+      },
+      {
+        id: 'pull1-curl-biceps',
+        name: 'Curl de bíceps con barra Z',
+        targetSets: 3,
+        targetReps: '10-12',
+        muscleGroup: 'Bíceps',
+        notes: 'Codos pegados al torso, excéntrica lenta de 2-3s.',
+      },
+    ],
+  },
+  {
+    dayNumber: 3,
+    dayName: 'Miércoles',
+    type: 'Legs',
+    title: 'Legs 1: Cuádriceps & Cadena Posterior Pesada',
+    targetDurationMinutes: 75,
+    exercises: [
+      {
+        id: 'legs1-sentadilla',
+        name: 'Sentadilla trasera con barra (Back Squat)',
+        targetSets: 4,
+        targetReps: '6-8',
+        muscleGroup: 'Cuádriceps / Glúteo',
+        notes: 'Profundidad paralela o mayor, rodillas abriendo en línea con pies.',
+      },
+      {
+        id: 'legs1-prensa',
+        name: 'Prensa 45°',
+        targetSets: 3,
+        targetReps: '10-12',
+        muscleGroup: 'Pierna completa',
+        notes: 'Pies a anchura media, bajar sin despegar la pelvis del respaldo.',
+      },
+      {
+        id: 'legs1-pm-rumano',
+        name: 'Peso muerto rumano con mancuernas o barra',
+        targetSets: 3,
+        targetReps: '8-10',
+        muscleGroup: 'Isquiosurales / Glúteos',
+        notes: 'Bisagra de cadera pura, rodillas semirrígidas, foco en el estiramiento.',
+      },
+      {
+        id: 'legs1-extension-cuad',
+        name: 'Extensión de cuádriceps en máquina',
+        targetSets: 3,
+        targetReps: '12-15',
+        muscleGroup: 'Cuádriceps',
+        notes: '1s contracción en el pico más alto.',
+      },
+      {
+        id: 'legs1-curl-femoral',
+        name: 'Curl femoral tumbado o sentado',
+        targetSets: 3,
+        targetReps: '12-15',
+        muscleGroup: 'Isquiosurales',
+        notes: 'Control total de la fase negativa sin balanceo de cadera.',
+      },
+      {
+        id: 'legs1-gemelos',
+        name: 'Elevación de talones de pie en máquina',
+        targetSets: 4,
+        targetReps: '15-20',
+        muscleGroup: 'Gemelos',
+        notes: 'Pausa profunda de 2s abajo y 1s de contracción arriba.',
+      },
+    ],
+  },
+  {
+    dayNumber: 4,
+    dayName: 'Jueves',
+    type: 'Push',
+    title: 'Push 2: Inclinado & Hipertrofia Deltoides',
+    targetDurationMinutes: 65,
+    exercises: [
+      {
+        id: 'push2-press-inclinado-barra',
+        name: 'Press inclinado con barra',
+        targetSets: 4,
+        targetReps: '8-10',
+        muscleGroup: 'Pecho superior',
+        notes: 'Bajada controlada a la parte alta del esternón.',
+      },
+      {
+        id: 'push2-press-militar-manc',
+        name: 'Press militar sentado con mancuernas',
+        targetSets: 3,
+        targetReps: '8-10',
+        muscleGroup: 'Hombro',
+        notes: 'Respaldo a 75-80°, recorrido amplio y fluido.',
+      },
+      {
+        id: 'push2-aperturas-cruce',
+        name: 'Aperturas / Cruce en poleas',
+        targetSets: 3,
+        targetReps: '12-15',
+        muscleGroup: 'Pecho',
+        notes: 'Gran estiramiento excéntrico y compresión concéntrica.',
+      },
+      {
+        id: 'push2-ext-triceps-polea',
+        name: 'Extensión de tríceps en polea alta con cuerda',
+        targetSets: 3,
+        targetReps: '12-15',
+        muscleGroup: 'Tríceps',
+        notes: 'Abrir la cuerda al final para máxima contracción.',
+      },
+      {
+        id: 'push2-elevaciones-laterales',
+        name: 'Elevaciones laterales en polea o mancuerna',
+        targetSets: 3,
+        targetReps: '15-20',
+        muscleGroup: 'Deltoides lateral',
+        notes: 'Tensión continua y acumulación de metabolitos.',
+      },
+    ],
+  },
+  {
+    dayNumber: 5,
+    dayName: 'Viernes',
+    type: 'Pull',
+    title: 'Pull 2: Amplitud Dorsal & Brazos',
+    targetDurationMinutes: 70,
+    exercises: [
+      {
+        id: 'pull2-jalon-pecho',
+        name: 'Jalón al pecho con agarre neutro o amplio',
+        targetSets: 4,
+        targetReps: '8-10',
+        muscleGroup: 'Dorsal ancho',
+        notes: 'Retracción escapular antes de traccionar hacia la clavícula.',
+      },
+      {
+        id: 'pull2-remo-maquina-manc',
+        name: 'Remo unilateral en máquina o mancuerna',
+        targetSets: 3,
+        targetReps: '10-12',
+        muscleGroup: 'Dorsal y Espalda media',
+        notes: 'Permitir que el omóplato se desplace adelante en la fase negativa.',
+      },
+      {
+        id: 'pull2-pm-rumano-ligero',
+        name: 'Peso muerto rumano ligero (técnica y bombeo)',
+        targetSets: 3,
+        targetReps: '10-12',
+        muscleGroup: 'Isquiosurales / Glúteos',
+        notes: 'Carga moderada buscando máxima conexión muscular en estiramiento.',
+      },
+      {
+        id: 'pull2-curl-martillo',
+        name: 'Curl martillo con mancuernas',
+        targetSets: 3,
+        targetReps: '10-12',
+        muscleGroup: 'Braquial / Antebrazo',
+        notes: 'Agarre neutro estricto, excelente para grosor de brazo.',
+      },
+      {
+        id: 'pull2-face-pull-alto',
+        name: 'Face pull en polea alta o pájaros con mancuerna',
+        targetSets: 3,
+        targetReps: '15-20',
+        muscleGroup: 'Deltoides posterior',
+        notes: 'Enfocar en la retracción escapular y deltoides posterior.',
+      },
+    ],
+  },
+  {
+    dayNumber: 6,
+    dayName: 'Sábado',
+    type: 'Legs',
+    title: 'Legs 2: Glúteo, Unilateral & Core',
+    targetDurationMinutes: 75,
+    exercises: [
+      {
+        id: 'legs2-sentadilla-bulgara',
+        name: 'Sentadilla búlgara con mancuernas',
+        targetSets: 3,
+        targetReps: '10-12',
+        muscleGroup: 'Glúteo / Cuádriceps',
+        notes: 'Tronco ligeramente inclinado al frente para mayor activación glútea.',
+      },
+      {
+        id: 'legs2-pm-convencional-sumo',
+        name: 'Peso muerto sumo o convencional moderado',
+        targetSets: 4,
+        targetReps: '6-8',
+        muscleGroup: 'Cadena posterior',
+        notes: 'Caderas abiertas, empuje vertical coordinado.',
+      },
+      {
+        id: 'legs2-prensa-unilateral',
+        name: 'Prensa unilateral con una pierna',
+        targetSets: 3,
+        targetReps: '10-12',
+        muscleGroup: 'Cuádriceps',
+        notes: 'Corrección de asimetrías y control excéntrico.',
+      },
+      {
+        id: 'legs2-curl-femoral-sentado',
+        name: 'Curl femoral sentado en máquina',
+        targetSets: 3,
+        targetReps: '12-15',
+        muscleGroup: 'Isquiosurales',
+        notes: 'Tronco inclinado hacia adelante para estirar el bíceps femoral.',
+      },
+      {
+        id: 'legs2-abdomen',
+        name: 'Elevaciones de piernas colgado / Plank con peso',
+        targetSets: 3,
+        targetReps: '15-20',
+        muscleGroup: 'Abdomen / Core',
+        notes: 'Pelvis basculada para aislar la pared abdominal.',
+      },
+    ],
+  },
+  {
+    dayNumber: 7,
+    dayName: 'Domingo',
+    type: 'Descanso/cardio suave',
+    title: 'Domingo: Recuperación Activa & Cardio Suave',
+    targetDurationMinutes: 30,
+    exercises: [
+      {
+        id: 'rest-cardio-suave',
+        name: 'Caminata inclinada, elíptica o bici suave',
+        targetSets: 1,
+        targetReps: '20-30 min',
+        muscleGroup: 'Cardiovascular / Movilidad',
+        notes: 'Zona 2 (conversacional), 110-125 ppm. Opcional para promover recuperación.',
+      },
+    ],
+  },
+];
+
+export const INITIAL_WEIGHT_LOGS: WeightEntry[] = [
+  {
+    id: 'weight-start-sep9',
+    date: '2026-09-09',
+    weightKg: 76.2,
+    note: 'Punto de partida oficial del plan de recomposición corporal.',
+  },
+];
+
+export const INITIAL_MEASUREMENTS: MeasurementEntry[] = [
+  {
+    id: 'meas-start-sep9',
+    date: '2026-09-09',
+    waistCm: 84.0,
+    hipsCm: 98.0,
+    armCm: 34.5,
+    thighCm: 57.0,
+    chestCm: 99.0,
+    notes: 'Medidas iniciales tomadas en ayunas.',
+  },
+];

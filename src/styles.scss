@@ -1,0 +1,288 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+:root {
+  --font-main: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Color Palette - Cyber Gym Aesthetic */
+  --bg-app: #080b11;
+  --bg-card: #101622;
+  --bg-card-hover: #141c2c;
+  --bg-surface: #172033;
+  --bg-input: #0b0f17;
+
+  --border-subtle: #1c273a;
+  --border-focus: #00f59b;
+
+  --accent-lime: #00f59b;
+  --accent-lime-glow: rgba(0, 245, 155, 0.25);
+  --accent-cyan: #00d9ff;
+  --accent-cyan-glow: rgba(0, 217, 255, 0.25);
+  --accent-orange: #ff6e26;
+  --accent-orange-glow: rgba(255, 110, 38, 0.25);
+  --accent-red: #ff3366;
+  --accent-purple: #b05cff;
+
+  --text-main: #f3f6fb;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --text-disabled: #475569;
+
+  --shadow-card: 0 4px 20px -2px rgba(0, 0, 0, 0.5), 0 0 1px 1px rgba(255, 255, 255, 0.05);
+  --shadow-glow-lime: 0 0 15px rgba(0, 245, 155, 0.35);
+  --shadow-glow-cyan: 0 0 15px rgba(0, 217, 255, 0.35);
+  --shadow-glow-orange: 0 0 15px rgba(255, 110, 38, 0.35);
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+
+  --safe-bottom: env(safe-area-inset-bottom, 16px);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  background-color: var(--bg-app);
+  color: var(--text-main);
+  font-family: var(--font-main);
+  font-size: 15px;
+  line-height: 1.5;
+  overflow-x: hidden;
+  letter-spacing: -0.01em;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-app);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-subtle);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Base Headings and numbers */
+h1, h2, h3, h4, .font-heading {
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: var(--text-main);
+}
+
+.mono-num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Reusable UI Utility Classes */
+.gym-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.15rem;
+  box-shadow: var(--shadow-card);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.gym-card:hover {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.badge-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--radius-full);
+}
+
+.badge-lime {
+  background: rgba(0, 245, 155, 0.12);
+  color: var(--accent-lime);
+  border: 1px solid rgba(0, 245, 155, 0.3);
+}
+
+.badge-cyan {
+  background: rgba(0, 217, 255, 0.12);
+  color: var(--accent-cyan);
+  border: 1px solid rgba(0, 217, 255, 0.3);
+}
+
+.badge-orange {
+  background: rgba(255, 110, 38, 0.12);
+  color: var(--accent-orange);
+  border: 1px solid rgba(255, 110, 38, 0.3);
+}
+
+.badge-purple {
+  background: rgba(176, 92, 255, 0.12);
+  color: var(--accent-purple);
+  border: 1px solid rgba(176, 92, 255, 0.3);
+}
+
+.badge-gray {
+  background: rgba(148, 163, 184, 0.1);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-subtle);
+}
+
+/* Button styles */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: var(--accent-lime);
+  color: #03150d;
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 0.65rem 1.25rem;
+  border-radius: var(--radius-sm);
+  border: none;
+  cursor: pointer;
+  box-shadow: var(--shadow-glow-lime);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+
+  &:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: var(--bg-surface);
+  color: var(--text-main);
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 0.6rem 1.1rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--text-muted);
+  }
+}
+
+.btn-icon {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-main);
+  border-radius: var(--radius-sm);
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--accent-cyan);
+    color: var(--accent-cyan);
+  }
+}
+
+/* Inputs */
+.gym-input {
+  width: 100%;
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-main);
+  font-family: var(--font-main);
+  font-size: 0.95rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: var(--radius-sm);
+  outline: none;
+  transition: border-color 0.2s ease;
+
+  &:focus {
+    border-color: var(--accent-lime);
+    box-shadow: 0 0 0 2px rgba(0, 245, 155, 0.15);
+  }
+
+  &::placeholder {
+    color: var(--text-muted);
+  }
+}
+
+/* Gym Checkbox */
+.gym-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 22px;
+  height: 22px;
+  background: var(--bg-input);
+  border: 2px solid var(--border-subtle);
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  display: grid;
+  place-content: center;
+
+  &:hover {
+    border-color: var(--accent-lime);
+  }
+
+  &:checked {
+    background: var(--accent-lime);
+    border-color: var(--accent-lime);
+    box-shadow: var(--shadow-glow-lime);
+
+    &::after {
+      content: '';
+      width: 6px;
+      height: 11px;
+      border: solid #03150d;
+      border-width: 0 2.5px 2.5px 0;
+      transform: rotate(45deg) translate(-1px, -1px);
+    }
+  }
+}
+
+/* Animations */
+@keyframes pulseNeon {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(0, 245, 155, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(0, 245, 155, 0.5);
+  }
+}
+
+.pulse-glow {
+  animation: pulseNeon 2s infinite ease-in-out;
+}
